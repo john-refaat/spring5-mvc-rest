@@ -1,6 +1,8 @@
 package guru.springfamework.bootstrap;
 
+import guru.springfamework.domain.Customer;
 import guru.springfamework.domain.Product;
+import guru.springfamework.repositories.CustomerRepository;
 import guru.springfamework.repositories.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -16,10 +18,12 @@ import java.util.List;
 @Component
 public class Bootstrap implements CommandLineRunner{
 
-    private ProductRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final CustomerRepository customerRepository;
 
-    public Bootstrap(ProductRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public Bootstrap(ProductRepository categoryRepository, CustomerRepository customerRepository) {
+        this.productRepository = categoryRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -45,9 +49,19 @@ public class Bootstrap implements CommandLineRunner{
         products.add(new Product(16, "Pineapple", "/shop/v2/products/16"));
         products.add(new Product(17, "Pineapple-Slice", "/shop/v2/products/17"));
         products.add(new Product(12, "Rambutan", "/shop/v2/products/12"));
-        categoryRepository.saveAll(products);
+        productRepository.saveAll(products);
+        log.info("Products saved successfully");
+        log.info("Products Loaded = {}", productRepository.count());
 
-        System.out.println("Data Loaded = " + categoryRepository.count() );
+
+        List<Customer> customers = new ArrayList<Customer>();
+        customers.add(new Customer(1, "John", "/shop/v2/customers/1"));
+        customers.add(new Customer(2, "Jane", "/shop/v2/customers/2"));
+        customers.add(new Customer(3, "Mary", "/shop/v2/customers/3"));
+        customers.add(new Customer(4, "Peter", "/shop/v2/customers/4"));
+        customerRepository.saveAll(customers);
+        log.info("Customers saved successfully");
+        log.info("Customers Loaded = {}", customerRepository.count());
 
     }
 }
