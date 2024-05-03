@@ -12,4 +12,8 @@ public interface CustomerService {
 
     CustomerDTO getCustomerById(Integer id);
     List<CustomerDTO> getAllCustomers();
+    CustomerDTO saveNewCustomer(CustomerDTO customerDTO);
+    CustomerDTO updateCustomer(Integer id, CustomerDTO customerDTO);
+    CustomerDTO patchCustomer(Integer id, CustomerDTO customerDTO);
+    void deleteCustomerById(Integer id);
 }

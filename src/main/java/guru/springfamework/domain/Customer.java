@@ -23,6 +23,6 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String selfLink;
+    private String firstName;
+    private String lastName;
 }

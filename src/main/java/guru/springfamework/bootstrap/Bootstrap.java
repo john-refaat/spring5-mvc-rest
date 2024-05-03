@@ -55,10 +55,10 @@ public class Bootstrap implements CommandLineRunner{
 
 
         List<Customer> customers = new ArrayList<Customer>();
-        customers.add(new Customer(1, "John", "/shop/v2/customers/1"));
-        customers.add(new Customer(2, "Jane", "/shop/v2/customers/2"));
-        customers.add(new Customer(3, "Mary", "/shop/v2/customers/3"));
-        customers.add(new Customer(4, "Peter", "/shop/v2/customers/4"));
+        customers.add(new Customer(1, "John", "Smith"));
+        customers.add(new Customer(2, "Jane", "Adam"));
+        customers.add(new Customer(3, "Mary", "Frank"));
+        customers.add(new Customer(4, "Peter", "Guzman"));
         customerRepository.saveAll(customers);
         log.info("Customers saved successfully");
         log.info("Customers Loaded = {}", customerRepository.count());

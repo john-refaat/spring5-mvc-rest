@@ -23,7 +23,7 @@ public class CustomerMapperTest {
     @Test
     public void customerToCustomerDTO() {
         //given
-        Customer customer = new Customer(1, "John", "/v1/customer/1");
+        Customer customer = new Customer(1, "John", "Smith");
 
         //when
         CustomerDTO customerDTO = mapper.customerToCustomerDTO(customer);
@@ -31,8 +31,8 @@ public class CustomerMapperTest {
         //then
         assertNotNull(customerDTO);
         assertEquals(1, customerDTO.getId().intValue());
-        assertEquals("John", customerDTO.getName());
-        assertEquals("/v1/customer/1", customerDTO.getSelfLink());
+        assertEquals("John", customerDTO.getFirstName());
+        assertEquals("Smith", customerDTO.getLastName());
 
     }
 
@@ -46,5 +46,32 @@ public class CustomerMapperTest {
 
         //then
         assertNull(customerDTO);
+    }
+
+    @Test
+    public void customerDTOToCustomer() {
+        //given
+        CustomerDTO customerDTO = new CustomerDTO(1, "John", "Smith", "/v1/customer/1");
+
+        //when
+        Customer customer = mapper.customerDTOToCustomer(customerDTO);
+
+        //then
+        assertNotNull(customer);
+        assertEquals(1, customer.getId().intValue());
+        assertEquals("John", customer.getFirstName());
+        assertEquals("Smith", customer.getLastName());
+    }
+
+    @Test
+    public void customerDTOToCustomerNull() {
+        //given
+        CustomerDTO customerDTO = null;
+
+        //when
+        Customer customer = mapper.customerDTOToCustomer(customerDTO);
+
+        //then
+        assertNull(customer);
     }
 }
