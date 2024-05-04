@@ -2,15 +2,11 @@ package guru.springfamework.api.v1.controllers;
 
 import guru.springfamework.api.v1.model.CustomerDTO;
 import guru.springfamework.api.v1.model.CustomerListDTO;
-import guru.springfamework.exceptions.ResourceNotFoundException;
 import guru.springfamework.services.CustomerService;
-import lombok.Generated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 /**
  * @author john
