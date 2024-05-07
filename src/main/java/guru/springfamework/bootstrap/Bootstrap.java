@@ -2,8 +2,10 @@ package guru.springfamework.bootstrap;
 
 import guru.springfamework.domain.Customer;
 import guru.springfamework.domain.Product;
+import guru.springfamework.domain.Vendor;
 import guru.springfamework.repositories.CustomerRepository;
 import guru.springfamework.repositories.ProductRepository;
+import guru.springfamework.repositories.VendorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -20,10 +22,12 @@ public class Bootstrap implements CommandLineRunner{
 
     private final ProductRepository productRepository;
     private final CustomerRepository customerRepository;
+    private final VendorRepository vendorRepository;
 
-    public Bootstrap(ProductRepository categoryRepository, CustomerRepository customerRepository) {
+    public Bootstrap(ProductRepository categoryRepository, CustomerRepository customerRepository, VendorRepository vendorRepository) {
         this.productRepository = categoryRepository;
         this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
@@ -63,5 +67,13 @@ public class Bootstrap implements CommandLineRunner{
         log.info("Customers saved successfully");
         log.info("Customers Loaded = {}", customerRepository.count());
 
+        List<Vendor> vendors = new ArrayList<Vendor>();
+        vendors.add(new Vendor(1, "Exotics Fruit Lair Ltd.", "exotics.fruits@example.com", "7778889994"));
+        vendors.add(new Vendor(2, "Max Obsthof GmbHs", "max.obsthof@example.com", "4445556789"));
+        vendors.add(new Vendor(3, "True Fruits Inc.", "truefruits@example.com", "2223334567"));
+        vendorRepository.saveAll(vendors);
+        log.info("Vendors saved successfully");
+        log.info("Vendors Loaded = {}", vendorRepository.count());
+        log.info("Finished in Bootstrap");
     }
 }

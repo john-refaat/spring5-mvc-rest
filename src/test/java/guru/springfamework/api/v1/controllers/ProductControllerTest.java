@@ -53,7 +53,6 @@ public class ProductControllerTest {
     @Test
     public void getProductList() throws Exception {
         //Given
-
         Mockito.when(productService.getAllProducts()).thenReturn(List.of(
                 new ProductDTO(ID_1, NAME_1, SELF_INK_1),
                 new ProductDTO(ID_2, NAME_2, SELF_INK_2),
