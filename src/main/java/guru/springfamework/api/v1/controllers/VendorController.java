@@ -4,6 +4,8 @@ import guru.springfamework.api.v1.mappers.VendorMapper;
 import guru.springfamework.api.v1.model.VendorDTO;
 import guru.springfamework.api.v1.model.VendorListDTO;
 import guru.springfamework.services.VendorService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @author john
  * @since 04/05/2024
  */
+@Api(description = "Vendor Endpoint" )
 @RestController
 @RequestMapping("/api/v1/vendors")
 public class VendorController {
@@ -25,6 +28,7 @@ public class VendorController {
         this.vendorMapper = vendorMapper;
     }
 
+    @ApiOperation(value = "Get The List of All Vendors")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public VendorListDTO getAllVendors() {
