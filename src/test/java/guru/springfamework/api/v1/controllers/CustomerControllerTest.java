@@ -60,7 +60,7 @@ public class CustomerControllerTest {
         Mockito.when(customerService.getAllCustomers()).thenReturn(List.of(
                 new CustomerDTO(ID_1, FNAME_1, LNAME_1, SELF_Link_1),
                 new CustomerDTO(ID_2, FNAME_2, LNAME_2, SELF_Link_2)));
-        mockMvc.perform(MockMvcRequestBuilders.get(BASE_PATH)
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_PATH).accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.customers", Matchers.hasSize(2)))
@@ -75,7 +75,8 @@ public class CustomerControllerTest {
         Mockito.when(customerService.getCustomerById(ID_1)).thenReturn(new CustomerDTO(ID_1, FNAME_1, LNAME_1, SELF_Link_1));
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.get(PATH_1).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get(PATH_1)
+                .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(ID_1)))
                .andExpect(MockMvcResultMatchers.jsonPath("$.first_name", Matchers.is(FNAME_1)))
@@ -94,7 +95,7 @@ public class CustomerControllerTest {
                 .thenReturn(new CustomerDTO(ID_1, FNAME_1, LNAME_1, SELF_Link_1));
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.post(BASE_PATH)
+        mockMvc.perform(MockMvcRequestBuilders.post(BASE_PATH).accept(MediaType.APPLICATION_JSON)
                        .contentType(MediaType.APPLICATION_JSON)
                        .content("{\"name\":\"" + FNAME_1 + "\"}"))
                .andExpect(MockMvcResultMatchers.status().isCreated())
@@ -115,7 +116,7 @@ public class CustomerControllerTest {
                 .thenReturn(new CustomerDTO(ID_1, FNAME_1, LNAME_1, SELF_Link_1));
 
         // When
-        mockMvc.perform(MockMvcRequestBuilders.put(PATH_1)
+        mockMvc.perform(MockMvcRequestBuilders.put(PATH_1).accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"first_name\":\"" + FNAME_1  + "\", "
                         +"\"last_name\":\"" + LNAME_1  + "\"}"))
@@ -137,6 +138,7 @@ public class CustomerControllerTest {
 
         // When
         mockMvc.perform(MockMvcRequestBuilders.patch(PATH_1)
+                        .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"first_name\":\"" + FNAME_1 + "\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())

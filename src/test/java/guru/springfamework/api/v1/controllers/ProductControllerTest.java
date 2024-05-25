@@ -59,7 +59,9 @@ public class ProductControllerTest {
                 new ProductDTO(ID_3, NAME_3, SELF_INK_3)));
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/products/").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/products/")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.jsonPath("$.products", Matchers.hasSize(3)))
                .andExpect(MockMvcResultMatchers.jsonPath("$.products[0].name", Matchers.is(NAME_1)))
@@ -76,7 +78,8 @@ public class ProductControllerTest {
         Mockito.when(productService.getProductByName(NAME_1)).thenReturn(new ProductDTO(ID_1, NAME_1, SELF_INK_1));
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/products/" + NAME_1).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/products/" + NAME_1)
+                .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(ID_1)))
                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is(NAME_1)))

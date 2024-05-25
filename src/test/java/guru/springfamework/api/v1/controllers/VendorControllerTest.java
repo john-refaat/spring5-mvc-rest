@@ -67,7 +67,8 @@ public class VendorControllerTest {
         )));
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/vendors/").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/vendors/")
+                .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.jsonPath("$.vendors", Matchers.hasSize(2)))
                .andExpect(MockMvcResultMatchers.jsonPath("$.vendors[0].name", Matchers.is(NAME_1)))
@@ -86,7 +87,8 @@ public class VendorControllerTest {
                 .thenReturn(new VendorDTO(ID_1, NAME_1, EMAIL_1, PHONE_1, ""));
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/vendors/1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/vendors/1")
+                .accept(MediaType.APPLICATION_JSON))
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is(NAME_1)))
                .andExpect(MockMvcResultMatchers.jsonPath("$.email", Matchers.is(EMAIL_1)))
@@ -105,7 +107,7 @@ public class VendorControllerTest {
         VendorDTO vendorDTO = new VendorDTO(null, NAME_1, EMAIL_1, PHONE_1, null);
 
         // When
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/vendors/")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/vendors/").accept(MediaType.APPLICATION_JSON)
                .contentType(MediaType.APPLICATION_JSON)
                .content(asJsonString(vendorDTO)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
